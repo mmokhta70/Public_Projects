@@ -3,12 +3,6 @@ variable "vpc_cidr" {
   type        = string
 }
 
-variable "public_subnet_cidr" {
-  description = "create a public subnet cider_block"
-  type        = string
-}
-
-variable "private_cidr_block" {
-  description = "cider_block IP address"
-  type        = string
+variable "vpc_name" {
+  description = "Use this for Name in the tag"
 }
