@@ -1,4 +1,4 @@
 #resource "aws_internet_gateway" "main"
-output "name" {
+output "igw_id" {
   value = aws_internet_gateway.main.id
 }
