@@ -1,4 +1,4 @@
-#I didn't upload the terraform.tfvars as it contains secrts
+#I didn't upload the terraform.tfvars as it contains secrets
 module "vpc" {
   source     = "../../foundation/vpc"
   cidr_block = "50.0.0.0/0"
