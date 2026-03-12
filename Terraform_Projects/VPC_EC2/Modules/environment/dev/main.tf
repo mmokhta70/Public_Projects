@@ -1,3 +1,4 @@
+#I didn't upload the terraform.tfvars as it contains secrts
 module "vpc" {
   source     = "../../foundation/vpc"
   cidr_block = "50.0.0.0/0"
@@ -11,3 +12,10 @@ module "public_subnet" {
   availability_zone = "eu-west-2"
   subnet_name       = "public_subnet_Intearnet_access"
 }
+
+#------------------but without terrafrom.tfvars
+# module "vpc" {
+#   source = "../../modules/foundation/vpc"
+#   cidr_block = "100.0.0.0/16"
+#   vpc_name   = "dev-vpc"
+# }
