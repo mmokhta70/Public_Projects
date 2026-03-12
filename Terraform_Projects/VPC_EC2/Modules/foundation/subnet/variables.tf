@@ -8,7 +8,7 @@ variable "cidr_block" {
   type        = string
 }
 
-variable "az" {
+variable "availability_zone" {
   description = "define an availability zone here"
   type        = string
 }
