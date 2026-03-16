@@ -41,3 +41,11 @@ resource "aws_s3_object" "index" {
   source       = var.html_file_path
   content_type = "text/html"
 }
+
+
+resource "aws_s3_object" "index" {
+  bucket       = var.bucket_name
+  key          = "error.html"
+  source       = var.html_file_path
+  content_type = "text/html"
+}
