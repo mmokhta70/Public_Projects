@@ -38,6 +38,6 @@ resource "aws_s3_bucket_policy" "read_only_policy" {
 resource "aws_s3_object" "index" {
   bucket       = var.bucket_name
   key          = "index.html"
-  source       = var.html_files
+  source       = var.html_file_path
   content_type = "text/html"
 }

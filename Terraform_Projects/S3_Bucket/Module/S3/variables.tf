@@ -3,7 +3,7 @@ variable "bucket_name" {
   type        = string
 }
 
-variable "html_files" {
+variable "html_file_path" {
   description = "Path for index.html file"
   type        = string
 }
