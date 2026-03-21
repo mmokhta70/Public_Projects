@@ -1,12 +1,17 @@
-variable "environmet" {
-  type        = string
-  description = "we will use this tag for our environments"
+provider "aws" {
+  region = "eu-west-2"
 }
 
-output "common_tag" {
-  value = {
-    Environment = var.environmet
-    Owner       = "https://www.linkedin.com/in/mmokhta"
-    Mangedby    = "Terraform"
-  }
+module "globale_tagging" {
+  source       = "../tagging"
+  environments = "prod"
+  owner        = "devops"
+  project_name = "nginx"
+}
+
+resource "aws_s3_bucket" "terraform_s3_state" {
+  bucket = "terraform-state"
+  tags = merge(module.globale_tagging.common_global_tags, {
+    Name = "Terraform_state"
+  })
 }

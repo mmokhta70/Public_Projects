@@ -3,10 +3,24 @@ variable "environments" {
   description = "we will use this tag for our environments"
 }
 
-output "common_tag" {
-  value = {
+variable "owner" {
+  description = "we can define the owner of resources"
+  type        = string
+}
+
+variable "project_name" {
+  type        = string
+  description = "we can define the project name here"
+}
+
+locals {
+  common_tags = {
     Environment = var.environments
-    Owner       = "https://www.linkedin.com/in/mmokhta"
-    Mangedby    = "Terraform"
+    Owner       = var.owner
+    Project     = var.project_name
   }
+}
+
+output "common_global_tags" {
+  value = local.common_tags
 }
