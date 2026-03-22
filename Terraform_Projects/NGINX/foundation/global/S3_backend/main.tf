@@ -14,4 +14,7 @@ resource "aws_s3_bucket" "terraform_s3_state" {
   tags = merge(module.globale_tagging.common_global_tags, {
     Name = "Terraform_state"
   })
+  lifecycle {
+    prevent_destroy = true
+  }
 }
