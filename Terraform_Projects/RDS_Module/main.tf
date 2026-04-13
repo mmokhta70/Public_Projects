@@ -20,3 +20,14 @@ module "security" {
   source = "./modules/security"
   vpc_id = var.vpc_id
 }
+
+
+module "rds" {
+  source = "./modules/rds"
+  credential = {
+    username = var.credentials.username
+    password = var.credentials.password
+  }
+  private_subnet_ids = module.networking.private_subnet_id
+  rds_sg_id          = module.networking.private_subnet_id
+}

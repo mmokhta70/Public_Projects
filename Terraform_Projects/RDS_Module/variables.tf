@@ -12,3 +12,11 @@ variable "azs" {
 }
 
 variable "vpc_id" {}
+
+
+variable "credentials" {
+  type = object({
+    username = string
+    password = string
+  })
+}
