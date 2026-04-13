@@ -2,7 +2,7 @@
 # create public subnet
 #------------------------------------
 resource "aws_subnet" "public_subnet" {
-  vpc_id            = var.vpc_id
+  vpc_id            = module.vpc.vpc_id
   for_each          = local.puclic_subnets
   cidr_block        = each.value.cidr
   availability_zone = each.value.azs
@@ -16,7 +16,7 @@ resource "aws_subnet" "public_subnet" {
 # create pricvate subnet
 #------------------------------------
 resource "aws_subnet" "private_subnet" {
-  vpc_id            = var.vpc_id
+  vpc_id            = module.vpc.vpc_id
   for_each          = local.private_subnets
   cidr_block        = each.value.cidr
   availability_zone = each.value.azs

@@ -7,7 +7,7 @@ locals {
     }
   }
   private_subnets = {
-    for i in range(var.var.private_subnet_count) :
+    for i in range(var.private_subnet_count) :
     "private-${i}" => {
       cidr = cidrsubnet(var.vpc_id, 8, i + 100)
       azs  = var.azs[i % length(var.azs)]
