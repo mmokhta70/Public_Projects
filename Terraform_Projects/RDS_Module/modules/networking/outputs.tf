@@ -1,5 +1,5 @@
 output "public_subnet_id" {
-  value = [for s in aaws_subnet.public_subnet : s.id]
+  value = [for s in aws_subnet.public_subnet : s.id]
 }
 
 
