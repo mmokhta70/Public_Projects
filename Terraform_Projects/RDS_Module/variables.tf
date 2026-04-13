@@ -14,9 +14,11 @@ variable "azs" {
 variable "vpc_id" {}
 
 
-variable "credentials" {
-  type = object({
-    username = string
-    password = string
-  })
+variable "db_username" {
+  type = string
+}
+
+variable "db_password" {
+  type      = string
+  sensitive = true
 }
