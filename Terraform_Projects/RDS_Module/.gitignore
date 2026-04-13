@@ -1,0 +1,68 @@
+# =========================
+# Terraform Core
+# =========================
+
+.terraform/
+.terraform.lock.hcl
+
+# Terraform state files (CRITICAL - NEVER COMMIT)
+*.tfstate
+*.tfstate.*
+crash.log
+
+# =========================
+# Terraform Plan Files
+# =========================
+
+*.tfplan
+
+# =========================
+# Sensitive Variables
+# =========================
+
+*.tfvars
+*.tfvars.json
+
+# Optional: allow example vars
+!*.tfvars.example
+
+# =========================
+# CLI Config Files
+# =========================
+
+.terraformrc
+terraform.rc
+
+# =========================
+# Environment / Secrets
+# =========================
+
+.env
+.env.*
+
+# =========================
+# OS / Editor Noise
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# JetBrains (IntelliJ, PyCharm, etc.)
+.idea/
+
+# =========================
+# Logs
+# =========================
+
+*.log
+
+# =========================
+# Temporary Files
+# =========================
+
+*.tmp
+*.bak
+*.swp
