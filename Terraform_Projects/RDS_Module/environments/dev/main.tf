@@ -1,6 +1,6 @@
 module "vpc" {
-  source         = "../../modules/vpc"
-  vpc_cidr_block = "10.0.0.0/16"
+  source   = "../../modules/vpc"
+  vpc_cidr = "10.0.0.0/16"
 }
 
 module "networking" {
@@ -24,4 +24,5 @@ module "rds" {
 
   private_subnet_ids = module.networking.private_subnet_ids
   rds_sg_ids         = module.security.rds_sg_ids
+  identifier         = var.identifier
 }

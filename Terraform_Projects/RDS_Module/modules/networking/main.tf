@@ -2,7 +2,7 @@
 # create public subnet
 #------------------------------------
 resource "aws_subnet" "public_subnet" {
-  vpc_id            = module.vpc.vpc_id
+  vpc_id            = var.vpc_id
   for_each          = local.puclic_subnets
   cidr_block        = each.value.cidr
   availability_zone = each.value.azs
@@ -16,7 +16,7 @@ resource "aws_subnet" "public_subnet" {
 # create pricvate subnet
 #------------------------------------
 resource "aws_subnet" "private_subnet" {
-  vpc_id            = module.vpc.vpc_id
+  vpc_id            = var.vpc_id
   for_each          = local.private_subnets
   cidr_block        = each.value.cidr
   availability_zone = each.value.azs
@@ -55,12 +55,24 @@ resource "aws_nat_gateway" "nat" {
 # create public route table
 #------------------------------------
 resource "aws_route_table" "pulic_rtb" {
+  count  = var.public_subnet_count > 0 ? 1 : 0
   vpc_id = var.vpc_id
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.Igw[0].id
   }
 }
+
+#------------------------------------
+# create public route table associate
+#------------------------------------
+resource "aws_route_table_association" "public_associate" {
+  for_each       = aws_subnet.public_subnet
+  subnet_id      = each.value.id
+  route_table_id = aws_route_table.pulic_rtb.id
+}
+
+
 
 #------------------------------------
 # create private route table
@@ -72,17 +84,6 @@ resource "aws_route_table" "private_rtb" {
     nat_gateway_id = aws_nat_gateway.nat[0].id
   }
 }
-
-
-#------------------------------------
-# create public route table associate
-#------------------------------------
-resource "aws_route_table_association" "public_associate" {
-  for_each       = aws_subnet.public_subnet
-  subnet_id      = each.value.id
-  route_table_id = aws_route_table.pulic_rtb.id
-}
-
 
 
 #------------------------------------

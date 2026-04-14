@@ -1,3 +1,6 @@
+#---------------------------------------
+# create subnets dynamically
+#---------------------------------------
 locals {
   puclic_subnets = {
     for i in range(var.public_subnet_count) :
