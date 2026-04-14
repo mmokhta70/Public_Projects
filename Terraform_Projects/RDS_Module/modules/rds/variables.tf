@@ -5,6 +5,10 @@
 
 variable "identifier" {
   type = string
+  validation {
+    condition     = length(var.identifier) > 3
+    error_message = "identifier must be larger than 3 charachters"
+  }
 }
 
 variable "engine_version" {
@@ -22,6 +26,10 @@ variable "storage_size" {
   default = 15
 }
 
+variable "db_name" {
+  type = string
+}
+
 #---------------------------
 # networking config
 #---------------------------
@@ -30,7 +38,7 @@ variable "private_subnet_ids" {
   type = list(string)
 }
 
-variable "rds_sg_id" {
+variable "rds_security_group_id" {
   type = list(string)
 }
 

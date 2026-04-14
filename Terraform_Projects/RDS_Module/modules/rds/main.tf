@@ -2,8 +2,8 @@
 # secret manager
 #---------------------------
 
-data "aws_secretsmanager_secret_version" "db" {
-  secret_id = "${var.identifier}-db-secret"
+resource "aws_secretsmanager_secret" "db" {
+  name = "${var.identifier}-db-secret"
 }
 
 resource "aws_secretsmanager_secret_version" "db" {
@@ -39,9 +39,9 @@ resource "aws_db_instance" "main" {
   allocated_storage      = var.storage_size
   storage_type           = "gp3"
   storage_encrypted      = true
-  db_name                = "testdb"
+  db_name                = var.db_name
   username               = var.credential.username
   password               = var.credential.password
   db_subnet_group_name   = aws_db_subnet_group.rds.name
-  vpc_security_group_ids = var.rds_sg_id
+  vpc_security_group_ids = var.rds_security_group_id
 }
