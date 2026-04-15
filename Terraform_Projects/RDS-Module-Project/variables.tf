@@ -21,6 +21,8 @@ variable "cost_centre" {
 }
 
 
-variable "" {
-
+variable "extra_tags" {
+  type        = map(string)
+  default     = {}
+  description = "we csutomise our tags"
 }
