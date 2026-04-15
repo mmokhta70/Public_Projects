@@ -7,9 +7,14 @@ variable "environment" {
   }
 }
 
+variable "project_name" {
+     type = string
+     description = "name of the project"
+}
+
 variable "owner" {
      type = string
-     description = "Oswner of the resources"
+     description = "Owner of the resources"
 }
 
 variable "cost_center" {

@@ -2,7 +2,7 @@
 #------------------- configure global tagging here
 global {
      default_tags = {
-          Project_name = var.Project_name
+          Project_name = var.project_name
           Environment = var.environment
           Owner = var.Owner
           MangedBy = "${var.environment}-team"
