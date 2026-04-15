@@ -10,5 +10,5 @@ global {
      financial_tags = {
      Costcenter = var.cost_center
      }
-     global_tgs = merge(local.default_tags, local.financial_tags, var.extra_tags)
+     global_tags = merge(local.default_tags, local.financial_tags, var.extra_tags)
 }

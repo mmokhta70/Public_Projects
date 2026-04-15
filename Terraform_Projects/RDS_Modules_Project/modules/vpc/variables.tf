@@ -7,7 +7,7 @@ variable "tags" {
   description = "Global tags that comes from tags module"
 }
 
-variable "Project_name" {
+variable "project_name" {
      type= string
      description = "this is a project name used or naming the reources"
 }
