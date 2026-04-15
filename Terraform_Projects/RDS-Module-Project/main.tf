@@ -1,5 +1,5 @@
 
-#-----------------
+#----------------- global tagging for project -----------------#
 locals {
   default_tags = {
     Environment  = var.environment
@@ -10,5 +10,5 @@ locals {
   financial_tags = {
     Costcentre = var.cost_centre
   }
-  golbal_tags = merge(local.default_tags, local.financial_tags)
+  golbal_tags = merge(local.default_tags, local.financial_tags, var.extra_tags)
 }

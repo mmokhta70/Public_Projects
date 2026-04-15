@@ -1,3 +1,4 @@
+#----------------- global tagging variables -----------------#
 variable "project_name" {
   type        = string
   description = "this is project name"
