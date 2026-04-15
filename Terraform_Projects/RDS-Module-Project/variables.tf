@@ -9,6 +9,18 @@ variable "owner" {
 }
 
 variable "environment" {
-  type        = string
-  description = "environments include : dev, prod , staging"
+  type = string
+  validation {
+    condition     = contains(["dev", "prod", "staging"])
+    error_message = "environments should include : dev, prod , staging"
+  }
+}
+
+variable "cost_centre" {
+  type = string
+}
+
+
+variable "" {
+
 }
