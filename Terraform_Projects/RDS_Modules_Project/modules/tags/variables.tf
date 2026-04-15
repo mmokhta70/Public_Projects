@@ -1,3 +1,4 @@
+#------------------- configure global tagging variables here
 variable "environment" {
   type = string
   validation {
