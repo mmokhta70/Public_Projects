@@ -2,7 +2,7 @@
 #------- this module contains subnets, IGw , NAT Gateway, Rotue table ------------#
 #
 #
-#--------- create subnets ---------#
+#--------- create public subnets ---------#
 resource "aws_subnet" "public" {
   for_each          = local.public_subnets
   vpc_id            = var.vpc_id
@@ -10,7 +10,7 @@ resource "aws_subnet" "public" {
   availability_zone = each.value.az
 }
 
-
+#--------- create private subnets ---------#
 resource "aws_subnet" "private" {
   vpc_id = var.vpc_id
 }
