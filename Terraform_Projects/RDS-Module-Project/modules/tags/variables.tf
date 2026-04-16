@@ -12,7 +12,7 @@ variable "owner" {
 variable "environment" {
   type = string
   validation {
-    condition     = contains(["dev", "prod", "staging"])
+    condition     = contains(["dev", "prod", "staging"], var.environment)
     error_message = "environments should include : dev, prod , staging"
   }
 }
