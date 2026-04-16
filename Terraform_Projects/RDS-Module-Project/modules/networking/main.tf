@@ -12,5 +12,9 @@ resource "aws_subnet" "public" {
 
 #--------- create private subnets ---------#
 resource "aws_subnet" "private" {
-  vpc_id = var.vpc_id
+  for_each          = local.private_subnets
+  vpc_id            = var.vpc_id
+  cidr_block        = each.value.cidr
+  availability_zone = each.value.az
+
 }
