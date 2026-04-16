@@ -8,6 +8,9 @@ resource "aws_subnet" "public" {
   vpc_id            = var.vpc_id
   cidr_block        = each.value.cidr
   availability_zone = each.value.az
+  tags = merge(var.tags, {
+    Name = each.key
+  })
 }
 
 #--------- create private subnets ---------#
@@ -16,5 +19,7 @@ resource "aws_subnet" "private" {
   vpc_id            = var.vpc_id
   cidr_block        = each.value.cidr
   availability_zone = each.value.az
-
+  tags = merge(var.tags, {
+    Name = each.key
+  })
 }
