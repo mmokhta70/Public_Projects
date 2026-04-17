@@ -5,7 +5,7 @@ locals {
   public_subnets = {
     for i, az in var.azs :
     "public${az}" => {
-      cidr = cidrsubnet(var.vpc_cidr, 8, 1)
+      cidr = cidrsubnet(var.vpc_cidr, 8, i)
       az   = az
     }
   }
