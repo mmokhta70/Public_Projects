@@ -54,3 +54,15 @@ resource "aws_route_table_association" "public" {
   subnet_id      = each.value.id
   route_table_id = aws_route_table.public_rtb.id
 }
+
+#--------- Private access indculde NAT Gateway, Elastic IP ,route table, route table association ---------#
+#
+#--------- create Elastic IP assress Per az
+
+resource "aws_eip" "nat" {
+  for_each = aws_subnet.public
+  domain   = "vpc"
+  tags = merge(var.tags, {
+    Name = "nat-eip-${each.key}"
+  })
+}
