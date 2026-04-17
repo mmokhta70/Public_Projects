@@ -1,4 +1,6 @@
+#------------------- create public and privet subnet based on availability zone -------------------#
 locals {
+  #------------------- Public Subnets -------------------#
   public_subnets = {
     for i, az in var.azs :
     "public${az}" => {
@@ -7,7 +9,7 @@ locals {
     }
   }
 
-
+  #------------------- Private Subnets -------------------#
   private_subnets = {
     for i, az in(var.azs) :
     "private-${az}" => {
