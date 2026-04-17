@@ -75,3 +75,13 @@ resource "aws_nat_gateway" "this" {
     Name = "nat-${each.key}"
   })
 }
+
+#--------- create route table per private subnet
+resource "aws_route_table" "private_rtb" {
+  for_each = aws_subnet.private
+  vpc_id   = var.vpc_id
+
+  tags = merge(var.tags, {
+    Name = "private-rtb-${each.key}"
+  })
+}
