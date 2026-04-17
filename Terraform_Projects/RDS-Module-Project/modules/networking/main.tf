@@ -2,7 +2,7 @@
 #------- this module contains subnets, IGw , NAT Gateway, Rotue table ------------#
 #
 #
-#--------- create public subnets ---------#
+#--------- public subnets ---------#
 resource "aws_subnet" "public" {
   for_each          = local.public_subnets
   vpc_id            = var.vpc_id
@@ -13,7 +13,7 @@ resource "aws_subnet" "public" {
   })
 }
 
-#--------- create private subnets ---------#
+#--------- private subnets ---------#
 resource "aws_subnet" "private" {
   for_each          = local.private_subnets
   vpc_id            = var.vpc_id
@@ -22,4 +22,9 @@ resource "aws_subnet" "private" {
   tags = merge(var.tags, {
     Name = each.key
   })
+}
+
+#--------- Internet Gateway ---------#
+resource "aws_internet_gateway" "igw" {
+  vpc_id = var.vpc_id
 }
