@@ -76,7 +76,7 @@ resource "aws_nat_gateway" "this" {
   })
 }
 
-#--------- create route table per private subnet
+#------------ Create Route table per private subnet ------------#
 resource "aws_route_table" "private_rtb" {
   for_each = aws_subnet.private
   vpc_id   = var.vpc_id
@@ -84,4 +84,12 @@ resource "aws_route_table" "private_rtb" {
   tags = merge(var.tags, {
     Name = "private-rtb-${each.key}"
   })
+}
+
+#------------ Creat Route to NAT ------------#
+resource "aws_route" "private-nat" {
+  for_each               = aws_subnet.private
+  route_table_id         = aws_route_table.private_rtb[each.key].id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = aws_nat_gateway.this["public-${each.value.availability_zone}"].id
 }
