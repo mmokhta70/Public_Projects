@@ -66,3 +66,12 @@ resource "aws_eip" "nat" {
     Name = "nat-eip-${each.key}"
   })
 }
+#--------- create NAT gateway per az
+resource "aws_nat_gateway" "this" {
+  for_each      = aws_subnet.public
+  allocation_id = aws_eip.nat[each.key].id
+  subnet_id     = each.value.id
+  tags = merge(var.tags, {
+    Name = "nat-${each.key}"
+  })
+}
