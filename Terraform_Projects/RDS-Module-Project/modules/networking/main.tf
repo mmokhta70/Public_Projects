@@ -26,5 +26,7 @@ resource "aws_subnet" "private" {
 
 #--------- Internet Gateway ---------#
 resource "aws_internet_gateway" "igw" {
+  for_each = aws_
+
   vpc_id = var.vpc_id
 }

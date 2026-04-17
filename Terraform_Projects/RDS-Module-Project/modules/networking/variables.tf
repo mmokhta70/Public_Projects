@@ -21,9 +21,11 @@ locals {
   }
 }
 
+
 variable "azs" {
   type = list(string)
 }
+
 
 variable "vpc_id" {}
 
