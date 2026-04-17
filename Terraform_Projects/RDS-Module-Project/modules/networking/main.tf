@@ -93,3 +93,10 @@ resource "aws_route" "private-nat" {
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = aws_nat_gateway.this["public-${each.value.availability_zone}"].id
 }
+
+#------------ Associate Private Subnets ------------#
+resource "aws_route_table_association" "private" {
+  for_each       = aws_subnet.private
+  subnet_id      = each.value.id
+  route_table_id = aws_route_table.private_rtb[each.key].id
+}
