@@ -1,3 +1,4 @@
+#------------------- Fetch AZs Automatically from the main region we defined -------------------#
 
 data "aws_availability_zones" "available" {
 
