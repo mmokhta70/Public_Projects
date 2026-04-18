@@ -4,7 +4,7 @@ locals {
   #------------------- Example: 10.0.0.0 , 10.0.1.0 , 10.0.2.0 , ....
   public_subnets = {
     for i, az in var.azs :
-    "public${az}" => {
+    "public-${az}" => {
       cidr = cidrsubnet(var.vpc_cidr, 8, i)
       az   = az
     }
