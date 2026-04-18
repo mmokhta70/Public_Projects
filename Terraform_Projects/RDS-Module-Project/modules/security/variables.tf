@@ -1,10 +1,12 @@
+#==================== define name for security group
 locals {
   name = "${var.project_name}-${var.environment}"
 }
 
 
 variable "project_name" {
-  type = string
+  type        = string
+  description = "name of project"
 }
 
 variable "vpc_id" {
@@ -12,7 +14,8 @@ variable "vpc_id" {
 }
 
 variable "environment" {
-  type = string
+  type        = string
+  description = "this is environment (dev, prod , staging)that fill out by environment area"
 }
 
 #==================== define ingress ports variable
