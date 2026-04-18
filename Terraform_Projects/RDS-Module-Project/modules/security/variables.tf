@@ -26,3 +26,8 @@ variable "ingress_config" {
   }])
   default = []
 }
+
+
+variable "tags" {
+  type = map(string)
+}
