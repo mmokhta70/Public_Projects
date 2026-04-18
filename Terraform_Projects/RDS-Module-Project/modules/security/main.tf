@@ -3,28 +3,31 @@ resource "aws_security_group" "this" {
   vpc_id      = var.vpc_id
   description = "this security group integrated with private subnets"
 
-  #================= create dynamic ingress rules =================#
-  dynamic "ingress_rules" {
+  #================= dynamic ingress =================#
+  dynamic "ingress" {
     for_each = var.ingress_config
-    content = {
-      from_port = each.value.from_port
-      to_port   = each.value.to_port
+
+    content {
+      from_port = ingress.value.from_port
+      to_port   = ingress.value.to_port
       protocol  = "tcp"
-      #================= Check if cidr_blocK exist or not
-      cidr_block = length(ingress_rules.value.cidr_block) > 0 ? ingress_rules.value.cidr_block : null
-      #================= Check if security_groups exist or not
-      security_groups = legnth(ingress_rules.value.security_groups) > 0 ? ingress_rules.value.security_groups : null
-    }
 
-    #================= define egress rules
-    egress {
-      from_port  = 0
-      to_port    = 0
-      protocol   = "-1"
-      cidr_block = ["0.0.0.0/0"]
-    }
+      cidr_blocks = length(ingress.value.cidr_block) > 0 ? ingress.value.cidr_block : null
 
+      security_groups = length(ingress.value.security_groups) > 0 ? ingress.value.security_groups : null
+
+      description = ingress.value.description
+    }
   }
+
+  #================= egress =================#
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   tags = merge(var.tags, {
     Name      = local.name
     Component = "rds"

@@ -20,13 +20,13 @@ variable "environment" {
 
 #==================== define ingress ports variable
 variable "ingress_config" {
-  type = list(object[{
+  type = list(object({
     from_port       = number
     to_port         = number
     cidr_block      = optional(list(string), [])
-    security_groups = optinal(list(string), [])
-    desciption      = string
-  }])
+    security_groups = optional(list(string), [])
+    description     = string
+  }))
   default = []
 }
 
