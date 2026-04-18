@@ -1,8 +1,4 @@
 
-variable "cidr_block" {
+variable "cidr_block" {}
 
-}
-
-variable "project_name" {
-  type = string
-}
+variable "project_name" {}

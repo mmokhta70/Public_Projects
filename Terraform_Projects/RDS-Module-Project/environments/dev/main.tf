@@ -14,7 +14,7 @@ module "tags" {
   cost_centre  = "123-as"
   environment  = "dev"
   owner        = "dev-team"
-  project_name = "RDS-Module"
+  project_name = var.project_name
 }
 
 #------------------- VPC module - Environmetn level -------------------#
@@ -41,4 +41,10 @@ module "security" {
   environment  = "dev"
   project_name = var.project_name
   tags         = module.tags.common_tags
+  ingress_config = [{
+    from_port   = 5432
+    to_port     = 5432
+    cidr_block  = [module.vpc.vpc_cidr]
+    description = "Allow internal DB access"
+  }]
 }
