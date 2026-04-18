@@ -33,3 +33,12 @@ module "networking" {
   azs      = local.azs
   tags     = module.tags.common_tags
 }
+
+#================== security module ==================#
+module "security" {
+  source       = "../../modules/security"
+  vpc_id       = module.vpc.vpc_id
+  environment  = "dev"
+  project_name = var.project_name
+  tags         = module.tags.common_tags
+}
