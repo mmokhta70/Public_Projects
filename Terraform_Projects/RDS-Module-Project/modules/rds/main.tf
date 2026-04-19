@@ -1,5 +1,6 @@
 
 #=================== RDS instance ===================#
+#
 resource "aws_db_instance" "this" {
   identifier = var.identifier
 
@@ -17,4 +18,7 @@ resource "aws_db_instance" "this" {
   db_name  = var.db_name
   username = var.credential.username
   password = var.credential.password
+
+  #---------- security group config ----------#
+  db_subnet_group_name = aws_db_sunbet_group.rds.name
 }
