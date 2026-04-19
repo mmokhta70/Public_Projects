@@ -11,3 +11,11 @@ variable "instance_class" {
   type    = string
   default = "db.t3.micro"
 }
+
+variable "storage_size" {
+  type    = number
+  default = 10
+}
+variable "" {
+
+}
