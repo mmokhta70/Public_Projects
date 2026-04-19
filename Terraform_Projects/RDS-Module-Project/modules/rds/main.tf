@@ -29,3 +29,20 @@ resource "aws_db_instance" "this" {
 resource "aws_secretsmanager_secret" "db" {
   name = "${var.identifier}-db-secret"
 }
+
+resource "aws_secretsmanager_secret_version" "db" {
+  secret_id = aws_secretsmanager_secret.db.id
+  secret_string = jsondecode({
+    username = var.credential.username
+    password = var.credential.password
+  })
+}
+
+#=================== Subnet group ===================#
+resource "aws_db_subnet_group" "this" {
+  name       = "rds_subnet_group"
+  subnet_ids = var.private_subnet_ids
+  tags = merge(var.tags, {
+    Name = "${local.name}-db-subnet-group}"
+  })
+}
