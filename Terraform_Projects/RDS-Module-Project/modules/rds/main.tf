@@ -12,4 +12,9 @@ resource "aws_db_instance" "this" {
   allocated_storage = var.storage_size
   storage_type      = "gp3"
   storage_encrypted = true
+
+  #---------- database config ----------#
+  db_name  = var.db_name
+  username = var.credential.username
+  password = var.credential.password
 }

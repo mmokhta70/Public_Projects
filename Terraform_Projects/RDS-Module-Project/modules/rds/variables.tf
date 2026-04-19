@@ -16,6 +16,14 @@ variable "storage_size" {
   type    = number
   default = 10
 }
-variable "" {
+variable "db_name" {
+  type = string
+}
 
+variable "credential" {
+  type = list(object({
+    username = string
+    password = string
+  }))
+  sensitive = true
 }
