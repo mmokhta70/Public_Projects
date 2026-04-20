@@ -48,3 +48,31 @@ module "security" {
     description = "Allow internal DB access"
   }]
 }
+
+#================== RDS module ==================#
+module "rds" {
+  source = "../../modules/rds"
+
+  #--------------- db config ---------------#
+  identifier     = var.identifier
+  db_name        = var.db_name
+  instance_class = var.instance_class
+  engine_version = "14"
+  storage_size   = 15
+  environment    = "dev"
+  project_name   = var.project_name
+
+  #--------------- credential ---------------#
+
+  credential = {
+    username = var.credential.username
+    password = var.credential.password
+  }
+
+  #--------------- subnet config ---------------#
+
+  private_subnet_ids = module.networking.private_subnet
+  security_group_ids = [module.security.security_group_id]
+
+  tags = module.tags.common_tags
+}
