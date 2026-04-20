@@ -32,10 +32,11 @@ variable "db_name" {
 #============ credential config ============#
 
 variable "credential" {
-  type = list(object({
+  type = object({
     username = string
     password = string
-  }))
+  })
+
   sensitive = true
 }
 

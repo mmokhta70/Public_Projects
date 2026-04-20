@@ -20,7 +20,7 @@ resource "aws_db_instance" "this" {
   password = var.credential.password
 
   #---------- security group config ----------#
-  db_subnet_group_name   = aws_db_sunbet_group.rds.name
+  db_subnet_group_name   = aws_db_subnet_group.this.name
   vpc_security_group_ids = var.security_group_ids
 }
 
@@ -32,7 +32,7 @@ resource "aws_secretsmanager_secret" "db" {
 
 resource "aws_secretsmanager_secret_version" "db" {
   secret_id = aws_secretsmanager_secret.db.id
-  secret_string = jsondecode({
+  secret_string = jsonencode({
     username = var.credential.username
     password = var.credential.password
   })
