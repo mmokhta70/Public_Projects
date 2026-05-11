@@ -39,21 +39,6 @@ variable "vpc_cidr" {
   description = "CIDR block for the VPC (must be a valid RFC 1918 private range)"
 }
 
-variable "public_subnet_cidrs" {
-  type        = list(string)
-  description = "CIDR blocks for public subnets, one per availability zone"
-}
-
-variable "private_subnet_cidrs" {
-  type        = list(string)
-  description = "CIDR blocks for private subnets used by RDS, one per availability zone"
-}
-
-variable "availability_zones" {
-  type        = list(string)
-  description = "Availability zones to deploy subnets into (must match length of subnet CIDR lists)"
-}
-
 variable "db_port" {
   type        = number
   description = "Port the database listens on (5432 for PostgreSQL, 3306 for MySQL)"

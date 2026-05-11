@@ -1,13 +1,3 @@
-#------------------- Fetch AZs automatically from the configured region -------------------#
-
-data "aws_availability_zones" "available" {
-  state = "available"
-}
-
-locals {
-  azs = slice(data.aws_availability_zones.available.names, 0, 2)
-}
-
 #------------------- Tags module -------------------#
 
 module "tags" {
@@ -32,14 +22,13 @@ module "vpc" {
 #------------------- Networking module -------------------#
 
 module "networking" {
-  source               = "../../modules/networking"
-  vpc_id               = module.vpc.vpc_id
-  public_subnet_cidrs  = var.public_subnet_cidrs
-  private_subnet_cidrs = var.private_subnet_cidrs
-  availability_zones   = local.azs
-  project_name         = var.project_name
-  environment          = "dev"
-  tags                 = module.tags.common_tags
+  source       = "../../modules/networking"
+  vpc_id       = module.vpc.vpc_id
+  vpc_cidr     = var.vpc_cidr
+  az_count     = 2
+  project_name = var.project_name
+  environment  = "dev"
+  tags         = module.tags.common_tags
 }
 
 #------------------- Security module -------------------#

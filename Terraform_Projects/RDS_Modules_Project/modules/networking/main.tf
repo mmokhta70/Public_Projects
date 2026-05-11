@@ -1,24 +1,50 @@
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+locals {
+  azs = slice(data.aws_availability_zones.available.names, 0, var.az_count)
+}
+
+locals {
+  public_subnets = {
+    for i, az in local.azs :
+    "public-${az}" => {
+      cidr = cidrsubnet(var.vpc_cidr, 8, i)
+      az   = az
+    }
+  }
+
+  private_subnets = {
+    for i, az in local.azs :
+    "private-${az}" => {
+      cidr = cidrsubnet(var.vpc_cidr, 8, i + length(local.azs))
+      az   = az
+    }
+  }
+}
+
 resource "aws_subnet" "public" {
-  count                   = length(var.public_subnet_cidrs)
+  for_each                = local.public_subnets
   vpc_id                  = var.vpc_id
-  cidr_block              = var.public_subnet_cidrs[count.index]
-  availability_zone       = var.availability_zones[count.index]
+  cidr_block              = each.value.cidr
+  availability_zone       = each.value.az
   map_public_ip_on_launch = true
 
   tags = merge(var.tags, {
-    Name = "${var.project_name}-${var.environment}-public-${count.index + 1}"
+    Name = "${var.project_name}-${var.environment}-${each.key}"
     Type = "public"
   })
 }
 
 resource "aws_subnet" "private" {
-  count             = length(var.private_subnet_cidrs)
+  for_each          = local.private_subnets
   vpc_id            = var.vpc_id
-  cidr_block        = var.private_subnet_cidrs[count.index]
-  availability_zone = var.availability_zones[count.index]
+  cidr_block        = each.value.cidr
+  availability_zone = each.value.az
 
   tags = merge(var.tags, {
-    Name = "${var.project_name}-${var.environment}-private-${count.index + 1}"
+    Name = "${var.project_name}-${var.environment}-${each.key}"
     Type = "private"
   })
 }
@@ -45,14 +71,14 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "public" {
-  count          = length(aws_subnet.public)
-  subnet_id      = aws_subnet.public[count.index].id
+  for_each       = aws_subnet.public
+  subnet_id      = each.value.id
   route_table_id = aws_route_table.public.id
 }
 
 resource "aws_db_subnet_group" "main" {
   name       = "${var.project_name}-${var.environment}-db-subnet-group"
-  subnet_ids = aws_subnet.private[*].id
+  subnet_ids = [for s in aws_subnet.private : s.id]
 
   tags = merge(var.tags, {
     Name = "${var.project_name}-${var.environment}-db-subnet-group"

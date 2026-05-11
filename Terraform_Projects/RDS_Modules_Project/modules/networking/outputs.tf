@@ -1,11 +1,11 @@
 output "public_subnet_ids" {
   description = "IDs of the public subnets"
-  value       = aws_subnet.public[*].id
+  value       = [for s in aws_subnet.public : s.id]
 }
 
 output "private_subnet_ids" {
   description = "IDs of the private subnets (used for the RDS DB subnet group)"
-  value       = aws_subnet.private[*].id
+  value       = [for s in aws_subnet.private : s.id]
 }
 
 output "db_subnet_group_name" {

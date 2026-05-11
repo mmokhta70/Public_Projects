@@ -2,7 +2,6 @@
 
 Creates the subnet layout, routing, and DB subnet group needed for an RDS deployment.
 
-
 ## Notes
 
 - Private subnets have no route to the internet gateway, keeping the DB tier isolated.
