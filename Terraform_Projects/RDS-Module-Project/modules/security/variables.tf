@@ -1,0 +1,36 @@
+#==================== define name for security group
+locals {
+  name = "${var.project_name}-${var.environment}"
+}
+
+
+variable "project_name" {
+  type        = string
+  description = "name of project"
+}
+
+variable "vpc_id" {
+
+}
+
+variable "environment" {
+  type        = string
+  description = "this is environment (dev, prod , staging)that fill out by environment area"
+}
+
+#==================== define ingress ports variable
+variable "ingress_config" {
+  type = list(object({
+    from_port       = number
+    to_port         = number
+    cidr_block      = optional(list(string), [])
+    security_groups = optional(list(string), [])
+    description     = string
+  }))
+  default = []
+}
+
+
+variable "tags" {
+  type = map(string)
+}

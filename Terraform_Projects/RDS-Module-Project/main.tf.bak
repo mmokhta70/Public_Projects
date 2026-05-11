@@ -1,0 +1,57 @@
+
+#------------------- VPC module -------------------#
+module "vpc" {
+  source     = "./modules/vpc"
+  cidr_block = var.cidr_block
+  tags       = module.tags.common_tags
+}
+
+#------------------- tagging module -------------------#
+module "tags" {
+  source       = "./modules/tags"
+  cost_centre  = "asd-123"
+  owner        = "Mehrdad.Mokhtari1370@gmail.com"
+  environment  = "dev"
+  project_name = "rds-module"
+}
+
+#------------------- Netwroking module -------------------#
+module "networking" {
+  source   = "./modules/networking"
+  vpc_id   = module.vpc.vpc_id
+  vpc_cidr = module.vpc.vpc_cidr
+  azs      = local.azs
+  tags     = module.tags.common_tags
+}
+
+
+#------------------- Security  module -------------------#
+module "security" {
+    source = "../../modules/security"
+    vpc_id = module.vpc.vpc_id
+    tags = module.tags.common_tags
+}
+
+
+#------------------- Security  module -------------------#
+module "rds" {
+  source = "../../modules/rds"
+
+  identifier     = "rds-test-db"
+  instance_class = "db.t3.micro"
+  engine_version = "14.11"
+  storage_size   = 15
+
+  private_subnet_ids = module.networking.private_subnet_ids
+
+  security_group_ids = [
+    module.security.security_group_id
+  ]
+
+  credential = {
+    username = var.db_username
+    password = var.db_password
+  }
+
+  tags = module.tags.tags
+}
