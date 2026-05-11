@@ -1,14 +1,6 @@
-data "aws_availability_zones" "available" {
-  state = "available"
-}
-
-locals {
-  azs = slice(data.aws_availability_zones.available.names, 0, var.az_count)
-}
-
 locals {
   public_subnets = {
-    for i, az in local.azs :
+    for i, az in var.azs :
     "public-${az}" => {
       cidr = cidrsubnet(var.vpc_cidr, 8, i)
       az   = az
@@ -16,9 +8,9 @@ locals {
   }
 
   private_subnets = {
-    for i, az in local.azs :
+    for i, az in var.azs :
     "private-${az}" => {
-      cidr = cidrsubnet(var.vpc_cidr, 8, i + length(local.azs))
+      cidr = cidrsubnet(var.vpc_cidr, 8, i + length(var.azs))
       az   = az
     }
   }

@@ -21,11 +21,15 @@ module "vpc" {
 
 #------------------- Networking module -------------------#
 
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 module "networking" {
   source       = "../../modules/networking"
   vpc_id       = module.vpc.vpc_id
   vpc_cidr     = var.vpc_cidr
-  az_count     = 2
+  azs          = data.aws_availability_zones.available.names
   project_name = var.project_name
   environment  = "dev"
   tags         = module.tags.common_tags

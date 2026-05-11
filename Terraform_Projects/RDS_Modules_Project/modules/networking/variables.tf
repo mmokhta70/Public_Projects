@@ -8,10 +8,9 @@ variable "vpc_cidr" {
   description = "CIDR block of the VPC — used by cidrsubnet() to derive subnet ranges"
 }
 
-variable "az_count" {
-  type        = number
-  description = "Number of availability zones to deploy subnets across"
-  default     = 2
+variable "azs" {
+  type        = list(string)
+  description = "List of availability zone names to deploy subnets across"
 }
 
 variable "project_name" {
