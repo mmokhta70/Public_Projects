@@ -1,0 +1,27 @@
+# Local Terraform working directories
+**/.terraform/*
+
+# State files — never commit these
+*.tfstate
+*.tfstate.*
+
+# Crash logs
+crash.log
+crash.*.log
+
+# tfvars files often contain secrets — use terraform.tfvars.example instead
+*.tfvars
+*.tfvars.json
+
+# Plan output files
+*tfplan*
+
+# Override files are for local testing only
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform CLI config
+.terraformrc
+terraform.rc
