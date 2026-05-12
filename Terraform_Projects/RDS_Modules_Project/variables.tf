@@ -18,6 +18,10 @@ variable "project_name" {
   description = "Name of the project, used as a prefix in all resource names"
 }
 
+variable "azs" {
+  type        = list(string)
+  description = "List of availability zones to use for subnets (e.g., [\"us-east-1a\", \"us-east-1b\", \"us-east-1c\"])"
+} 
 variable "owner" {
   type        = string
   description = "Owner of the resources, applied as a tag"
