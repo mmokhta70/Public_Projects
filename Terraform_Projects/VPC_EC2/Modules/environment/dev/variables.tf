@@ -1,15 +1,29 @@
 variable "vpc_cidr" {
-  type = string
+  description = "CIDR block for the VPC"
+  type        = string
 }
 
 variable "public_subnet_cidr" {
-  type = string
+  description = "CIDR block for the public subnet"
+  type        = string
 }
 
-variable "available_zone" {
-  type = string
+variable "availability_zone" {
+  description = "AWS availability zone for the subnet"
+  type        = string
 }
 
 variable "ami" {
-  type = string
+  description = "AMI ID for the EC2 instance"
+  type        = string
+}
+
+variable "instance_type" {
+  description = "EC2 instance type"
+  type        = string
+}
+
+variable "instance_name" {
+  description = "Name tag for the EC2 instance"
+  type        = string
 }
