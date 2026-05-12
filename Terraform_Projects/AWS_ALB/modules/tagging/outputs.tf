@@ -1,28 +1,4 @@
-variable "environmet" {
-  type = string
-  validation {
-    condition     = contains([dev, prod, staging], var.environemt)
-    error_message = "environmet must be dev, prod , or staging"
-  }
-}
-
-variable "project_name" {
-  type        = string
-  description = "name of the project"
-}
-
-variable "owner" {
-  type        = string
-  description = "Owner of the resources"
-}
-
-variable "cost_center" {
-  type        = string
-  description = "Cost center for billing"
-}
-
-variable "extra_tags" {
-  type        = map(string)
-  default     = {}
-  description = "more tags on top of the standard tags"
+output "common_tags" {
+  value       = local.global_tags
+  description = "All common tags to apply to whole project"
 }
