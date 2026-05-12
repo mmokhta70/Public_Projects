@@ -1,4 +1,4 @@
-variable "environmet" {
+variable "environment" {
   type = string
   validation {
     condition     = contains([dev, prod, staging], var.environemt)

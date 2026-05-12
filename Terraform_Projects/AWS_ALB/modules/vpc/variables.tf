@@ -8,3 +8,18 @@ variable "cidr_block" {
     error_message = "vpc_cidr must be a valid RFC 1918 private CIDR (10.x.x.x, 172.16-31.x.x, or 192.168.x.x) with a prefix length between /8 and /28."
   }
 }
+
+variable "project_name" {
+  type        = string
+  description = "Project name used for resource naming and tagging"
+}
+
+variable "environment" {
+  type        = string
+  description = "Must be one of the this values: dev, staging, or prod"
+}
+
+variable "tags" {
+  type        = map(string)
+  description = "common tags from tagging module"
+}
