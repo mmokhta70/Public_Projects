@@ -71,4 +71,10 @@ resource "aws_security_group" "sg_private" {
     protocol    = "tcp"
     cidr_blocks = [aws_security_group.sg_public.id]
   }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
