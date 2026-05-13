@@ -36,3 +36,15 @@ resource "aws_security_group" "sg-alb" {
 #-----------------
 # Create SG-public (used for web servers)
 #-----------------
+resource "aws_security_group" "sg_public" {
+  vpc_id = aws_vpc.main.id
+  name   = "${var.project_name}-sg_public"
+
+  #---- only the traffic comes from the alb are accepted
+  ingress {
+    from_port   = 443
+    to_port     = 433
+    protocol    = "tcp"
+    cidr_blocks = [aws_security_group.sg-alb.id]
+  }
+}
