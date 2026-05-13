@@ -63,7 +63,7 @@ resource "aws_security_group" "sg_private" {
   name   = "${var.project_name}-${var.environment}-sg-private"
 
 
-  #------ only accept traffic from SG-Public
+  #----------- only accept traffic from SG-Public
   ingress {
     description = "we used MYSQL, MYSQL from web servers only"
     from_port   = 3306
