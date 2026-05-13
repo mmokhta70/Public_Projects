@@ -54,3 +54,21 @@ resource "aws_security_group" "sg_public" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+#-----------------
+# Create SG-private (used for DB servers)
+#-----------------
+resource "aws_security_group" "sg_private" {
+  vpc_id = aws_vpc.main.id
+  name   = "${var.project_name}-sg-private"
+
+
+  #------ only accept traffic from SG-Public
+  ingress {
+    description = "we used MYSQL, MYSQL from web servers only"
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = [aws_security_group.sg_public.id]
+  }
+}
