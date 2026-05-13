@@ -2,8 +2,8 @@
 # Create SG-ALB (facing to the internet)
 #-----------------
 resource "aws_security_group" "sg-alb" {
-  name   = "${var.project_name}-sg-alb"
-  vpc_id = aws_vpc.main.id
+  name   = "${var.project_name}-${var.environment}-sg-alb"
+  vpc_id = var.vpc_id
   #------------------accept all http traffic from internet
   ingress {
     description = "allow all HTTP from internet"
@@ -37,8 +37,8 @@ resource "aws_security_group" "sg-alb" {
 # Create SG-public (used for web servers)
 #-----------------
 resource "aws_security_group" "sg_public" {
-  vpc_id = aws_vpc.main.id
-  name   = "${var.project_name}-sg_public"
+  vpc_id = var.vpc_id
+  name   = "${var.project_name}-${var.environment}-sg-public"
 
   #---- only the traffic comes from the alb are accepted
   ingress {
@@ -59,8 +59,8 @@ resource "aws_security_group" "sg_public" {
 # Create SG-private (used for DB servers)
 #-----------------
 resource "aws_security_group" "sg_private" {
-  vpc_id = aws_vpc.main.id
-  name   = "${var.project_name}-sg-private"
+  vpc_id = var.vpc_id
+  name   = "${var.project_name}-${var.environment}-sg-private"
 
 
   #------ only accept traffic from SG-Public
