@@ -28,5 +28,8 @@ variable "public_subnet" {
      type = lsit(string)
      description = " list of all public subnet IDs"
 }
-
+variable "sg_public" {
+     type = string 
+     description = "The ID of the public security group - allowinf trrafic comes through the web servers"
+}
 
