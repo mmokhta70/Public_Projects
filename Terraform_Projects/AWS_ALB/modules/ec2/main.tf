@@ -6,3 +6,10 @@ validation {
   error_message = "Please make sure you choose the correct instance type. Allowed values are: t3.micro, t3.medium, t3.large."
   }
 }
+
+
+variable "project_name" {
+     type = string
+     description = "The name of the project to which the instance belongs."
+}
+
