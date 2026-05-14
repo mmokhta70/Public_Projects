@@ -2,14 +2,20 @@
 # fetch all the az in your region 
 #=====================================
 
-locals {
-     azs = data.aws_availability_zone.available.names
+data "aws_availability_zones" "available" {
+  state = "available"
 }
 
-data "aws_availability_zone" "available" {
-state = "available"
+locals {
+  azs = data.aws_availability_zones.available.names
 
-public_subnet = [
-     for i in range(lenght(local.azs))) : cidrnet(cidr_block, 8 , i)
-]
+  public_subnets = [
+    for i in range(length(local.azs)) :
+    cidrsubnet(var.cidr_block, 8, i)
+  ]
+
+  private_subnets = [
+     for i in range(length(local.azs)):
+     cidrsubnet(var.cidr_block, 8, i+length(local.azs))
+  ]
 }
