@@ -17,3 +17,10 @@ variable "environment" {
      type = string
      description = "The environment in which the instance will be deployed (e.g., dev, staging, prod)."
 }
+
+
+variable "Private_subnet" {
+     type = list(string)
+     description = "A list of private subnet IDs"
+}
+
