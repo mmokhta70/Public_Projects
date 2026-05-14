@@ -52,4 +52,8 @@ variable "azs" {
 }
 
 
-
+variable "common_tags" {
+  description = "Global tags from tagging module for naming all resources."
+  type        = map(string)
+  default     = {}
+}
