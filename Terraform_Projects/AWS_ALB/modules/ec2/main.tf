@@ -13,3 +13,7 @@ variable "project_name" {
      description = "The name of the project to which the instance belongs."
 }
 
+variable "environment" {
+     type = string
+     description = "The environment in which the instance will be deployed (e.g., dev, staging, prod)."
+}
