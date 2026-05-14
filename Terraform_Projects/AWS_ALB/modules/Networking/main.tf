@@ -42,7 +42,22 @@ resource "aws_subnet" "public_subnet" {
      map_public_ip_on_launch = true
 
      tags = merge (var.common_tags , {
-          Name = "£{var.project_name}-${var.environment}-public-subnet-${local.azs[count.index]}"
+          Name = "${var.project_name}-${var.environment}-public-subnet-${local.azs[count.index]}"
      })
 
+}
+
+#====================================
+# Create private subnet
+#====================================
+resource "aws_subnet" "private_subnet" {
+     vpc_id = var.vpc_id
+     count = length(local.private_subnets)
+     cidr_block = local.private_subnets[count.index]
+     map_public_ip_on_launch = false
+     availability_zone = local.azs[count.index]
+
+     tags = merge (var.common_tags , {
+          Name = "${var.project_name}-${var.environment}-private-subnet-${local.azs[count.index]}"
+     })
 }
