@@ -38,6 +38,12 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = [var.sg_public_id]
   key_name = aws_key_pair.this.key_name
 
+  user_data = <<-EOF
+    #!/bin/bash
+    yum update -y
+    yum install -y httpd
+  EOF
+
   tags = merge (var.common_tags , {
     Name = "${var.project_name}-${var.environment}-web-${count.index + 1}"
     type= "web-server"
@@ -67,6 +73,12 @@ resource "aws_instance" "db" {
   subnet_id = var.Private_subnet[count.index]
   vpc_security_group_ids = [var.sg_private_id]
   key_name = aws_key_pair.this.key_name
+
+  user_data = <<-EOF
+              #!/bin/bash
+              yum update -y
+              yum install -y mysql-server
+  EOF
 
 tags = merge(var.common_tags  , {
   Name = "${var.project_name}-${var.environment}-db-${count.index + 1}"
