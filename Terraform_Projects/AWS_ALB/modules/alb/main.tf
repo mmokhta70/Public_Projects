@@ -21,4 +21,18 @@ resource "aws_alb" "main_alb" {
   protocol = "HTTP"
   vpc_id = var.vpc_id 
 
- }
+health_check {
+enabled = true
+path = "/"
+protocol = "HTTP"
+healthy_threshold = 3
+unhealthy_threshold = 3
+interval = 30
+timeout = 5
+matcher = "200-399"
+
+    } 
+    tags = merge(var.common_tags, {
+      Name = "${var.project_name}-${var.environment}-alb-tg"
+    })
+}
