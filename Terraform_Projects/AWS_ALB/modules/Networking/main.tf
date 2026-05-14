@@ -67,7 +67,28 @@ resource "aws_subnet" "private_subnet" {
 #====================================
 resource "aws_route_table" "public_rtb" {
      vpc_id = var.vpc_id
+
+     route {
+          cidr_block = "0.0.0.0/0"
+          gateway_id = aws_internet_gateway.igw.id
+     }
+
      tags = merge (var.common_tags , {
           Name = "${var.project_name}-${var.environment}-public-rtb"
      })
 }
+
+
+#====================================
+# Create route table for private subnet
+#====================================
+resource "aws_route_table" "private_rtb" {
+     vpc_id= var.vpc_id
+
+     tags = merge (var.common_tags , {
+          Name = "${var.project_name}-${var.environment}-private-rtb"
+     })
+}
+
+
+
