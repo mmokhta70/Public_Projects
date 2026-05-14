@@ -29,3 +29,20 @@ resource "aws_internet_gateway" "igw" {
           Name = "£{var.project_name}-${var.environment}-igw"
      })
 }
+
+
+#====================================
+# Create public subnet
+#====================================
+resource "aws_subnet" "public_subnet" {
+     vpc_id = var.vpc_id
+     count = length(local.public_subnets)
+     cidr_block = local.public_subnets[count.index]
+     availability_zone = local.azs[count.index]
+     map_public_ip_on_launch = true
+
+     tags = merge (var.common_tags , {
+          Name = "£{var.project_name}-${var.environment}-public-subnet-${local.azs[count.index]}"
+     })
+
+}
