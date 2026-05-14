@@ -28,13 +28,23 @@ variable "public_subnet" {
      type = lsit(string)
      description = " list of all public subnet IDs"
 }
-variable "sg_public" {
+variable "sg_public_id" {
      type = string 
      description = "The ID of the public security group - allowinf trrafic comes through the web servers"
 }
 
 
-variable "sg_private" {
+variable "sg_private_id" {
      type = string
       description = "The ID of the private security group - alloowing traffic comes through the DBs"
 }
+
+
+variable "target_group_arn" {
+     type = string 
+     description = "this the alb taget group that all web servers will be registered to it"
+}
+
+
+
+
