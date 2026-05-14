@@ -24,3 +24,9 @@ variable "Private_subnet" {
      description = "A list of private subnet IDs"
 }
 
+variable "public_subnet" {
+     type = lsit(string)
+     description = " list of all public subnet IDs"
+}
+
+
