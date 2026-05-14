@@ -8,3 +8,7 @@ output "private_subnet_ids" {
      description = "The IDs of the private subnets- for db servers"
 }
 
+output "azs" {
+  value = local.azs
+  description = "The availability zones used for the subnets"
+}
