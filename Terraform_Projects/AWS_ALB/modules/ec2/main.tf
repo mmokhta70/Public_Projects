@@ -57,3 +57,20 @@ resource "aws_lb_target_group_attachment" "web" {
   port = 443
 }
 
+#====================================
+# DB servers that palced in the private subnets
+#====================================
+resource "aws_instance" "db" {
+  count = length(var.Private_subnet)
+  ami= data.aws_ami.amazon_linux.id
+  instance_type = var.instance_type
+  subnet_id = var.Private_subnet[count.index]
+  vpc_security_group_ids = [var.sg_private_id]
+  key_name = aws_key_pair.this.key_name
+
+tags = merge(var.common_tags  , {
+  Name = "${var.project_name}-${var.environment}-db-${count.index + 1}"
+  type = "database"
+  AZ = var.azs[count.index]
+})
+}
