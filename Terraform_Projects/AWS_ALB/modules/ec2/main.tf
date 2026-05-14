@@ -33,3 +33,8 @@ variable "sg_public" {
      description = "The ID of the public security group - allowinf trrafic comes through the web servers"
 }
 
+
+variable "sg_private" {
+     type = string
+      description = "The ID of the private security group - alloowing traffic comes through the DBs"
+}
