@@ -44,3 +44,16 @@ resource "aws_instance" "web" {
     AZ = var.azs[count.index]
   })
 }
+
+
+#====================================
+# Target group - register each web server into the ALB target group
+# if target group is empty the alb has nowhere should to send the teraffic
+#====================================
+resource "aws_lb_target_group_attachment" "web" {
+  count = length(var.public_subnet)
+  target_group_arn = var.target_group_arn
+  target_id = aws_instance.web[count.index].id
+  port = 443
+}
+
