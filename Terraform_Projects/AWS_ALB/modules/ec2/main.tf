@@ -46,5 +46,10 @@ variable "target_group_arn" {
 }
 
 
+variable "azs" {
+     type  = list(string)
+     description = "list of all the azs that used in ec2 instances"
+}
+
 
 
