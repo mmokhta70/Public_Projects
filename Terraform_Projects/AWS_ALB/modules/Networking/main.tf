@@ -92,3 +92,11 @@ resource "aws_route_table" "private_rtb" {
 
 
 
+#====================================
+# Create route table association for public subnet
+#====================================
+resource "aws_route_table_association" "public_rtb_assocication" {
+     count = length(local.azs)
+     subnet_id = aws_subnet.public_subnet[count.index].id
+     route_table_id = aws_route_table.public_rtb.id
+}
