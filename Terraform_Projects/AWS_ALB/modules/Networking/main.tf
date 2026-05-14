@@ -61,3 +61,13 @@ resource "aws_subnet" "private_subnet" {
           Name = "${var.project_name}-${var.environment}-private-subnet-${local.azs[count.index]}"
      })
 }
+
+#====================================
+# Create route table for public subnet
+#====================================
+resource "aws_route_table" "public_rtb" {
+     vpc_id = var.vpc_id
+     tags = merge (var.common_tags , {
+          Name = "${var.project_name}-${var.environment}-public-rtb"
+     })
+}
