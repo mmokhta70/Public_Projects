@@ -12,3 +12,14 @@ output "azs" {
   value = local.azs
   description = "The availability zones used for the subnets"
 }
+
+output "public_subnet_cidrs" {
+  value = local.public_subnets
+  description = "The CIDR blocks of the public subnets"
+}
+
+
+output "private_subnet_cidrs" {
+  value = local.private_subnets
+  description = "The CIDR blocks of the private subnets"
+}
