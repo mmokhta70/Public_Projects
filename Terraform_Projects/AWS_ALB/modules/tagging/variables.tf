@@ -11,6 +11,17 @@ variable "project_name" {
   description = "name of the project"
 }
 
+variable "team" {
+  type        = string
+  description = "name of team"
+}
+
+
+variable "department " {
+  type        = string
+  description = "name of department"
+}
+
 variable "owner" {
   type        = string
   description = "Owner of the resources"
