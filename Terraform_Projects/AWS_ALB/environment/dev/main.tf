@@ -76,3 +76,20 @@ module "alb" {
   environment       = var.environment
   project_name      = var.project_name
 }
+
+#==================================
+# ec2 module
+#==================================
+module "ec2" {
+  source           = "../../modules/ec2"
+  instance_type    = var.instance_type
+  public_subnet    = module.networking.public_subnet_ids
+  Private_subnet   = module.networking.private_subnet_ids
+  sg_private_id    = module.security_group.sg_private_id
+  sg_public_id     = module.security_group.sg_public_id
+  target_group_arn = module.alb.target_group_arn
+  azs              = module.networking.azs
+  environment      = var.environment
+  project_name     = var.project_name
+  common_tags      = module.tagging.common_tags
+}
