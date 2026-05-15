@@ -19,6 +19,9 @@ provider "aws" {
   }
 }
 
+#==================================
+# tagging module block for all modules
+#==================================
 module "tagging" {
   source       = "../../modules/tagging"
   environment  = var.environment
@@ -26,4 +29,16 @@ module "tagging" {
   owner        = var.owner
   cost_center  = var.cost_center
   team         = var.team
+}
+
+
+#==================================
+# vpc module
+#==================================
+module "vpc" {
+  source       = "../../modules/vpc"
+  cidr_block   = var.cidr_block
+  project_name = var.project_name
+  environment  = var.environment
+  common_tags  = module.tagging.common_tags
 }

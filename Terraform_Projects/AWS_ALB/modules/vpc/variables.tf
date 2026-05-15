@@ -19,7 +19,7 @@ variable "environment" {
   description = "Must be one of the this values: dev, staging, or prod"
 }
 
-variable "tags" {
+variable "common_tags" {
   type        = map(string)
   description = "common tags from tagging module"
 }
