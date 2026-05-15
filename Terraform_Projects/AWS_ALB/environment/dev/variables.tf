@@ -4,6 +4,11 @@ variable "region" {
   default     = "eu-west-2"
 }
 
+variable "vpc_cidr" {
+  description = "VPC CIDR block"
+  type        = string
+}
+
 variable "project_name" {
   type        = string
   description = "project name"
