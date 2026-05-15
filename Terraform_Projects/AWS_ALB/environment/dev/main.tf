@@ -42,3 +42,14 @@ module "vpc" {
   environment  = var.environment
   common_tags  = module.tagging.common_tags
 }
+
+#==================================
+# Networking module
+#==================================
+module "networking" {
+  source       = "../../modules/Networking"
+  vpc_id       = module.vpc.vpc_id
+  cidr_block   = var.cidr_block
+  environment  = var.environment
+  project_name = var.project_name
+}
