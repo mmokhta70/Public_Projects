@@ -24,6 +24,11 @@ variable "instance_type" {
   description = "Ec2 instance type like t3.micro, t3.large,..."
 }
 
+variable "certification_arn" {
+  type        = string
+  description = "ACM certificate for HTTPS traffic only"
+  default     = ""
+}
 variable "common_tags" {
   type        = map(string)
   description = "common tags for all resources"
