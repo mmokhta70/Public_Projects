@@ -8,3 +8,8 @@ variable "project_name" {
      type = string
      description = "project name"
 }
+
+variable "environment" {
+     type = string 
+     description = "environment name"
+}
