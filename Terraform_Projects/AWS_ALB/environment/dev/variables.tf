@@ -29,8 +29,26 @@ variable "certification_arn" {
   description = "ACM certificate for HTTPS traffic only"
   default     = ""
 }
-variable "common_tags" {
-  type        = map(string)
-  description = "common tags for all resources"
-  default     = {}
+
+#=====================================
+# tagging varaiables
+# ====================================
+variable "owner" {
+  type        = string
+  description = "Mehrdad.Mokhtari1370@gmail.com"
+}
+
+variable "team" {
+  type        = string
+  description = "name of the Team"
+}
+
+variable "cost_center" {
+  type        = string
+  description = "cost center billing code"
+}
+
+variable "department" {
+  type        = string
+  description = "Name of department"
 }
