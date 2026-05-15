@@ -13,3 +13,13 @@ variable "environment" {
      type = string 
      description = "environment name"
 }
+
+variable "cidr_block" {
+type = string 
+description = "cidr_block range Ip address"
+}
+variable "common_tags" {
+     type = map(string)
+     description = "common tags for all resources"
+     default = {}
+}
