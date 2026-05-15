@@ -17,11 +17,6 @@ variable "team" {
 }
 
 
-variable "department " {
-  type        = string
-  description = "name of department"
-}
-
 variable "owner" {
   type        = string
   description = "Owner of the resources"

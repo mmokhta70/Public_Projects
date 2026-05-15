@@ -26,6 +26,4 @@ module "tagging" {
   owner        = var.owner
   cost_center  = var.cost_center
   team         = var.team
-  department   = var.department
-
 }

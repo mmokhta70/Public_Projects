@@ -47,8 +47,3 @@ variable "cost_center" {
   type        = string
   description = "cost center billing code"
 }
-
-variable "department" {
-  type        = string
-  description = "Name of department"
-}
